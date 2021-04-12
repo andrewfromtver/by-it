@@ -204,4 +204,12 @@ export default () => {
     localStorage.removeItem('defaultLang')
     location.reload()
   }
+  document.querySelector('#home').style.backgroundColor = ''
+  document.querySelector('#admin').style.backgroundColor = '#5cd8dc'
+  document.querySelector('#user').style.backgroundColor = ''
+  document.querySelector('#kpi').style.backgroundColor = ''
+  document.querySelector('#home').style.boxShadow = ''
+  document.querySelector('#admin').style.boxShadow = '0px 0px 10px rgb(92, 216, 220)'
+  document.querySelector('#user').style.boxShadow = ''
+  document.querySelector('#kpi').style.boxShadow = ''
 }
