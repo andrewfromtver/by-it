@@ -36,7 +36,7 @@ export default () => {
   document.querySelector('.container').innerHTML = adminContainer
   if (!localStorage.kpi) {
     document.querySelector('.container').innerHTML += `
-      <p style="text-align: center;">
+      <p style="text-align: center; font-weight: 900;">
         ¯\\_(ツ)_/¯
       </p>
       <br>

@@ -1,5 +1,6 @@
 import './style.css'
 
+import favImg from './assets/favicon.png'
 import background from "./assets/background.jpg"
 import navbarHome from "./assets/home.png"
 import navbarList from "./assets/list.png"
@@ -17,6 +18,12 @@ import user from './views/user.js'
 import kpi from './views/kpi.js'
 
 window.onload = () => {
+  const headTitle = document.querySelector('head'),
+  setFavicon = document.createElement('link')
+  setFavicon.setAttribute('rel','shortcut icon')
+  setFavicon.setAttribute('href',favImg)
+  headTitle.appendChild(setFavicon)
+  
   const {translations} = require('./app_data/multilang.js')
   const navlinks = [
     {'id': 'home', 'func': home, 'img': navbarHome, 'height': 24, 'width': 24},

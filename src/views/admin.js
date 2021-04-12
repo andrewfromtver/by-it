@@ -71,7 +71,7 @@ export default () => {
   }
   else {
     document.querySelector('.container').innerHTML += `
-      <p style="text-align: center;">¯\\_(ツ)_/¯</p>
+      <p style="text-align: center; font-weight: 900;">¯\\_(ツ)_/¯</p>
     `
   }
 
