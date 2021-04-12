@@ -151,3 +151,9 @@ button:active {
     transform: rotate(360deg);
   }
 }
+
+input, select {
+  border-radius: 0px;
+  appearance: none;
+  -webkit-appearance: none;
+}
