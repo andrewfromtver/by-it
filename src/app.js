@@ -23,7 +23,10 @@ window.onload = () => {
   setFavicon.setAttribute('rel','shortcut icon')
   setFavicon.setAttribute('href',favImg)
   headTitle.appendChild(setFavicon)
-  
+
+  document.body.style.backgroundImage = `url(${background})`
+  document.body.style.backgroundColor = '#333333'
+
   const {translations} = require('./app_data/multilang.js')
   const navlinks = [
     {'id': 'home', 'func': home, 'img': navbarHome, 'height': 24, 'width': 24},
@@ -80,8 +83,9 @@ window.onload = () => {
       }
     }, 2500);
   }
-  document.body.style.backgroundImage = `url(${background})`
+  
   document.body.appendChild(initApp())
+  
   document.querySelector('.app').appendChild(splash())
   document.querySelector('.app').appendChild(navbar(navlinks))
   document.querySelector('.app').appendChild(footer(`Copyright © ${year} Andranik Sarkisyan`))
