@@ -18,6 +18,12 @@ import user from './views/user.js'
 import kpi from './views/kpi.js'
 
 window.onload = () => {
+  const vp = document.createElement('meta')
+  vp.id = 'customViewport'
+  vp.name = 'viewport'
+  vp.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0'
+  document.head.appendChild(vp)
+
   const headTitle = document.querySelector('head'),
   setFavicon = document.createElement('link')
   setFavicon.setAttribute('rel','shortcut icon')

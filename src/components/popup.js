@@ -19,7 +19,7 @@ const popupStyle = `
         background-color: #ffffff;
         margin: 0 auto;
         box-shadow: 0px 2px 10px #aaaaaa;
-        border-radius: 4px
+        border-radius: 4px;
       `,
       itemTextStyle = `
         margin: 10px 10%;
@@ -60,10 +60,16 @@ const popupStyle = `
         cursor: pointer;
       `,
       popupErrorStyle = `
-        margin: 0 5% 10px 5%;
+        padding: 0 5%;
         color: tomato;
         text-align: center;
-      `;
+        width: 95vw;
+        max-width: calc(350px - 10%);
+        position: absolute;
+        box-shadow: 0px 2px 10px #aaaaaa;
+        border-radius: 4px;
+        background-color: #ffff;
+      `
 /////////////////////
 export default (items, confirmText = undefined, denyText = undefined) => {
   const blurUi = (toggle = false) => {
@@ -71,7 +77,7 @@ export default (items, confirmText = undefined, denyText = undefined) => {
             document.querySelector('.app').style = `
               filter: blur(8px);
               opacity: 0.8;
-            `;
+            `
           }
           else {
             document.querySelector('.app').style = ``;
@@ -79,76 +85,81 @@ export default (items, confirmText = undefined, denyText = undefined) => {
         },
         errorCleaner = () => {
           document.querySelector('.popupError').innerText = '';
-        };
+        }
 
   const popup = document.createElement('div'),
         popupElem = document.createElement('div'),
         actionButtons = document.createElement('div'),
-        popupError = document.createElement('p');
+        popupError = document.createElement('p')
 
-  blurUi(true);
-  popup.className = 'popup';
-  popup.style = popupStyle;
-  popupElem.style = popupElemStyle;
-  popup.appendChild(popupElem);
+  blurUi(true)
+  popup.className = 'popup'
+  popup.style = popupStyle
+  popupElem.style = popupElemStyle
+  popup.appendChild(popupElem)
   items.forEach(e => {
     if (e.elemType == 'h1' |e.elemType == 'h2' | e.elemType == 'h3' | e.elemType == 'p') {
-      const item = document.createElement(e.elemType);
-      item.innerHTML = e.text;
-      item.style = itemTextStyle;
+      const item = document.createElement(e.elemType)
+      item.innerHTML = e.text
+      item.style = itemTextStyle
       if (e.elemType != 'p') {
-        item.style = itemTextStyle + 'text-align: center;';
+        item.style = itemTextStyle + 'text-align: center;'
       }
-      popupElem.appendChild(item);
+      popupElem.appendChild(item)
     }
     else if (e.elemType == 'input' | e.elemType == 'select') {
-      const item = document.createElement(e.elemType);
-      if (e.id) { item.id = e.id;}
-      if (e.type) { item.type = e.type;}
-      if (e.maxLength) { item.maxLength = e.maxLength;}
-      if (e.placeholder) { item.placeholder = e.placeholder;}
-      if (e.halfWidth) { item.style = itemInputStyle + 'width: 34%; margin: 10px 4% 10px 8%;';}
+      const item = document.createElement(e.elemType)
+      if (e.id) { item.id = e.id}
+      if (e.type) { item.type = e.type}
+      if (e.maxLength) { item.maxLength = e.maxLength}
+      if (e.placeholder) { item.placeholder = e.placeholder}
+      if (e.halfWidth) { 
+        item.style = itemInputStyle + 'width: 34%; margin: 10px 4% 10px 8%;'
+      }
       if (!e.halfWidth) {
         if (e.elemType == 'input') {
-          item.style = itemInputStyle + 'width: 80%; margin: 10px 8%;';
+          item.style = itemInputStyle + 'width: 80%; margin: 10px 8%;'
         }
         else if (e.elemType == 'select') {
-          item.style = itemInputStyle + 'width: 84%; margin: 10px 8%;';
+          item.style = itemInputStyle + 'width: 84%; margin: 10px 8%;'
         }
       }
-      popupElem.appendChild(item);
-      item.oninput = errorCleaner;
+      popupElem.appendChild(item)
+      item.oninput = errorCleaner
       if (e.elemType == 'select' && e.options) {
         e.options.forEach(opt => {
-          const option = document.createElement('option');
-          option.value = opt;
-          option.innerText = opt;
-          item.appendChild(option);
+          const option = document.createElement('option')
+          option.value = opt
+          option.innerText = opt
+          item.appendChild(option)
         })
       }
     }
-  });
-  actionButtons.style = actionButtonsStyle;
+  })
+  actionButtons.style = actionButtonsStyle
   if (confirmText) {
-    const confirm = document.createElement('button');
-    confirm.style = confirmBtnStyle;
-    confirm.innerText = confirmText[0];
-    confirm.onclick = confirmText[1];
-    actionButtons.appendChild(confirm);
+    const confirm = document.createElement('button')
+    confirm.style = confirmBtnStyle
+    confirm.innerText = confirmText[0]
+    confirm.onclick = confirmText[1]
+    actionButtons.appendChild(confirm)
   }
   if (denyText) {
-    const deny = document.createElement('button');
-    deny.style = denyBtnStyle;
-    deny.innerText = denyText;
-    deny.onclick = () => { popup.remove(); blurUi(false); }
-    actionButtons.appendChild(deny);
+    const deny = document.createElement('button')
+    deny.style = denyBtnStyle
+    deny.innerText = denyText
+    deny.onclick = () => { 
+      popup.remove()
+      blurUi(false) 
+    }
+    actionButtons.appendChild(deny)
   }
-  popupElem.appendChild(actionButtons);
-  popupError.className = 'popupError';
-  popupError.style = popupErrorStyle;
-  popupElem.appendChild(popupError);
+  popupElem.appendChild(actionButtons)
+  popupError.className = 'popupError'
+  popupError.style = popupErrorStyle
+  popupElem.appendChild(popupError)
 
-  return popup;
+  return popup
 }
 
 // usage
@@ -160,6 +171,6 @@ const popupItems = [
   {'elemType': 'input', 'id': 'w', 'type': 'text', 'float': false, 'maxLength': 2, 'placeholder': 'Placeholder text', 'halfWidth': true},
   {'elemType': 'input', 'id': 'e', 'type': 'text', 'float': true, 'maxLength': 5, 'placeholder': 'Placeholder text', 'halfWidth': true},
   {'elemType': 'select', 'id': 'r', 'options': [1, 2, 3, 4, 5], 'halfWidth': false},
-];
-document.body.appendChild(popup(popupItems, 'OK', 'Cancel'));
+]
+document.body.appendChild(popup(popupItems, 'OK', 'Cancel'))
 */
